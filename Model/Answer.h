@@ -6,28 +6,35 @@
 #define ASKOOP_ANSWER_H
 
 #include "Question.h"
-class Answer {
+class Answer
+{
 private:
     int id;
-    Question* question;
     string content;
+    Question *question;
     static int count;
-    void setID();
 
 public:
-    //setter
-    int getId() const;
-    void setQuestion(Question *question);
-    void setContent(const string &content);
-    //getter
-    Question *getQuestion() const;
-    const string &getContent() const;
-    static int getCount();
+    Answer() : content(""),question(nullptr)
+    {
+        id = ++count;
+    }
+    Answer(string content, Question &question)
+    {
+        id = ++count;
+        setContent(content);
+        setQuestion(question);
+    }
 
+    void setContent(string content);
+    void setQuestion(Question &question);
+    void disply();
+
+    Question* getQuestion();
 
 };
 
 int Answer::count = 0;
 
-
-#endif //ASKOOP_ANSWER_H
+#endif // ASKOOP_ANSWER_H
+#pragma once

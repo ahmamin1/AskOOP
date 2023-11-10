@@ -1,34 +1,26 @@
-//
-// Created by Ahmed Amin on 03/11/2023.
-//
-
 #include "Answer.h"
-
-void Answer::setContent(const string &content) {
+#include <iostream>
+using namespace std;
+void Answer::setContent(string content)
+{
     this->content = content;
 }
 
-void Answer::setQuestion(Question *question) {
-    this->question = question;
+void Answer::setQuestion(Question &question)
+{
+    this->question = &question;
 }
 
-Question *Answer::getQuestion() const {
+void Answer::disply()
+{
+    cout << "ans id: " << id << endl
+         << "content: " << content << endl
+         << "question: "; question->disply();
+
+    cout << endl;
+}
+
+Question *Answer::getQuestion()
+{
     return question;
-}
-
-const string &Answer::getContent() const {
-    return content;
-}
-
-int Answer::getId() const {
-    return id;
-}
-
-int Answer::getCount() {
-    return count;
-}
-
-void Answer::setID() {
-    Answer::count++;
-    id = Answer::count;
 }

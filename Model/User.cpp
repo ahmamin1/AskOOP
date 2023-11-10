@@ -2,54 +2,50 @@
 // Created by Ahmed Amin on 03/11/2023.
 //
 
+#include "Question.h"
+#include "Answer.h"
+#include "thread.h"
 #include "User.h"
 
-
-void User::setID() {
-    User::count++;
-    id = User::count;
+void User::setName(string name)
+{
+    this->name =name ;    
+}
+void User::setUserName(string userName)
+{
+    this->userName =userName ;
+}
+void User::setPassword(string password)
+{
+    this->password =password ;
+}
+void User::setEmail(string email)
+{
+    this-> email= email;
+}
+void User::setAllowAnonymousQuestions(bool allowAnonymousQuestions)
+{
+    this->allowAnonymousQuestions= allowAnonymousQuestions;
 }
 
-void User::setName(const string &name) {
-    this->name = name;
-}
-
-void User::setUserName(const string &userName) {
-    this->userName = userName;
-}
-
-void User::setPassword(const string &password) {
-    this->password = password;
-}
-
-void User::setEmail(const string &email) {
-    this->email = email;
-}
-
-void User::setAllowAnonymousQuestions(bool allowAnonymousQuestions) {
-    this->allowAnonymousQuestions = allowAnonymousQuestions;
-}
-
-int User::getId() const {
-    return id;
-}
-
-const string &User::getName() const {
+string User::getName()
+{
     return name;
 }
-
-const string &User::getUserName() const {
-    return userName;
+Question User::askQuestion(string content, User &receiver)
+{
+    Question q(content, *this, receiver);
+    return q;
 }
 
-const string &User::getEmail() const {
-    return email;
+
+Answer User::answerQuestion(string content, Question &question)
+{
+    Answer a(content,question);
+    return a;
 }
 
-bool User::isAllowAnonymousQuestions() const {
-    return allowAnonymousQuestions;
-}
-
-int User::getCount() {
-    return count;
+Thread User::makeThread(string content,Answer &answer){
+    Thread t(content,answer);
+    return t;
 }

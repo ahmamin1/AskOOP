@@ -2,41 +2,60 @@
 // Created by Ahmed Amin on 03/11/2023.
 //
 
-#ifndef ASKOOP_USER_H
-#define ASKOOP_USER_H
+#ifndef USER_H
+#define USER_H
+
+
+#include "Model.h"
 #include <string>
-#include <vector>
-#include "Question.h"
-using namespace std;
-class User {
+class Question; 
+class Answer; 
+class Thread;
+using namespace std; 
+class User : public Model {
 private:
-    int id;
+    int id; 
     string name;
     string userName;
     string password;
     string email;
     bool allowAnonymousQuestions;
-    static int count;
-    void setID();
+
+    static int counter; 
 public:
-    //setters
-    void setName(const string &name);
-    void setUserName(const string &userName);
-    void setPassword(const string &password);
-    void setEmail(const string &email);
+   User(){
+        counter++; 
+        id = counter;
+        setName("");
+        setUserName("");
+        setPassword("");
+        setEmail("");
+        setAllowAnonymousQuestions(false);
+    }
+    User(string name,string userName, string password, string email,bool allowAnonymousQuestions){
+        counter++; 
+        id = counter;
+        setName(name);
+        setUserName(userName);
+        setPassword(password);
+        setEmail(email);
+        setAllowAnonymousQuestions(allowAnonymousQuestions);
+    }
+    void setName(string name);
+    void setUserName(string userName);
+    void setPassword(string password);
+    void setEmail(string email);
     void setAllowAnonymousQuestions(bool allowAnonymousQuestions);
-    //getters
-    int getId() const;
-    const string &getName() const;
-    const string &getUserName() const;
-    const string &getEmail() const;
-    bool isAllowAnonymousQuestions() const;
-    static int getCount();
+
+    string getName();
+
+    Question askQuestion(string content,User &receiver);
+
+    Answer answerQuestion(string content, Question &question);
+    Thread makeThread(string content, Answer &answer);
 };
-
-int User::count = 0;
-
+int User::counter = 0;
 
 
-
-#endif //ASKOOP_USER_H
+#endif
+#pragma once

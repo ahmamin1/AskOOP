@@ -4,41 +4,45 @@
 
 #ifndef ASKOOP_QUESTION_H
 #define ASKOOP_QUESTION_H
-#include <string>
 #include "User.h"
+#include <string>
+
 using namespace std;
 
-class Question {
+class Question : Model
+{
     static int count;
     int id;
     string content;
-    User* sender;
-    User* receiver;
-public:
-    static void setCount(int count);
-
-    void setId(int id);
-
-    void setContent(const string &content);
-
-    void setSender(User *sender);
-
-    void setReceiver(User *receiver);
+    User *sender;
+    User *receiver;
 
 public:
-    static int getCount();
+    Question() : content(""), sender(nullptr), receiver(nullptr)
+    {
+        count++;
+        id = count;
+    }
+    Question(string content, User &sender, User &receiver)
+    {
+        count++;
+        id = count;
+        setContent(content);
+        setSender(sender);
+        setReceiver(receiver);
+    }
 
-    int getId() const;
+    void setContent(string content);
+    void setSender(User &sender);
+    void setReceiver(User &receiver);
+    void disply();
+    User *getSender();
+    User *getReceiver();
 
-    const string &getContent() const;
-
-    User *getSender() const;
-
-    User *getReceiver() const;
-
+    friend ostream &operator<<(ostream &out, const Question &c);
 };
 
 int Question::count = 0;
 
-
-#endif //ASKOOP_QUESTION_H
+#endif // ASKOOP_QUESTION_H
+#pragma once

@@ -3,45 +3,33 @@
 //
 
 #include "Question.h"
+#include "iostream"
+using namespace std;
 
 
-int Question::getCount() {
-    return count;
-}
-
-int Question::getId() const {
-    return id;
-}
-
-const string &Question::getContent() const {
-    return content;
-}
-
-User *Question::getSender() const {
-    return sender;
-}
-
-User *Question::getReceiver() const {
-    return receiver;
-}
-
-void Question::setCount(int count) {
-    Question::count = count;
-}
-
-void Question::setId(int id) {
-    Question::count++;
-    id = Question::count;
-}
-
-void Question::setContent(const string &content) {
+void Question::setContent(string content) {
     this->content = content;
 }
 
-void Question::setSender(User *sender) {
-    this->sender = sender;
+void Question::setSender(User &sender) {
+    this->sender = &sender;
 }
 
-void Question::setReceiver(User *receiver) {
-    this->receiver = receiver;
+void Question::setReceiver(User &receiver) {
+    this->receiver = &receiver;
+}
+
+
+
+void Question::disply(){
+    cout << content << "from: " << sender->getName() << "To:  " << receiver->getName() ;  
+}
+
+User *Question::getSender()
+{
+    return sender;
+}
+User *Question::getReceiver()
+{
+    return receiver;
 }
