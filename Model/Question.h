@@ -16,9 +16,10 @@ class Question : Model
     string content;
     User *sender;
     User *receiver;
+    bool isAnonymousQuestions;
 
 public:
-    Question() : content(""), sender(nullptr), receiver(nullptr)
+    Question() : content(""), sender(nullptr), receiver(nullptr) ,  isAnonymousQuestions(false)
     {
         count++;
         id = count;

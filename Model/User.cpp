@@ -28,6 +28,21 @@ void User::setAllowAnonymousQuestions(bool allowAnonymousQuestions)
     this->allowAnonymousQuestions= allowAnonymousQuestions;
 }
 
+int User::getID()
+{
+    return id;
+}
+
+string User::getUserName()
+{
+    return userName;
+}
+string User::getPassword()
+{
+    return password;
+}
+
+
 string User::getName()
 {
     return name;
